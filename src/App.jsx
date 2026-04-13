@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -32,10 +33,11 @@ function App() {
       return task;
     });
 
-    function onDeleteTaskClick(taskId) {
-      const newTasks = tasks.filter((task) => task.id != taskId);
-    }
+    setTasks(newTasks);
+  }
 
+  function onDeleteTaskClick(taskId) {
+    const newTasks = tasks.filter((task) => task.id != taskId);
     setTasks(newTasks);
   }
 
@@ -45,7 +47,12 @@ function App() {
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Tarefas
         </h1>
-        <Tasks tasks={tasks} onTaskClick={onTaskClick} />
+        <AddTask />
+        <Tasks
+          tasks={tasks}
+          onTaskClick={onTaskClick}
+          onDeleteTaskClick={onDeleteTaskClick}
+        />
       </div>
     </div>
   );
